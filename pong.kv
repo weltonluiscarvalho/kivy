@@ -24,6 +24,8 @@
   ball: pong_ball
   player1: player_left
   player2: player_right
+  button_pause: button_pause
+  label_wins: wins_game
 
   canvas:
     Rectangle:
@@ -56,3 +58,18 @@
     x: root.width - self.width
     center_y: root.center_y
 
+  Button:
+    id: button_pause
+    center_x: root.center_x
+    center_y: root.height / 10
+    size: 100, 40
+    text: "pause"
+
+  Label:
+    id: wins_game
+    center_x: root.center_x
+    center_y: root.center_y
+    size: 100, 100
+    font_size: 70
+    text: ""
+    opacity: 0.0
