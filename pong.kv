@@ -27,6 +27,12 @@
   button_pause: button_pause
   label_wins: wins_game
 
+  canvas.before:
+    Rectangle:
+      pos: self.x, self.y
+      size: self.width, self.height
+      source: "fundo_casa.jpg" 
+
   canvas:
     Rectangle:
       pos: self.center_x - 5, 0
