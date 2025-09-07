@@ -1,0 +1,45 @@
+Manager:
+  Menu:
+    name: 'menu'
+  Game:
+    name: 'game'
+
+<Menu>:
+  BoxLayout:
+    canvas:
+      Color:
+        rgba: 1, 1, 1, 1
+      Rectangle:
+        size: self.size
+        pos: self.pos
+        source: 'fundo_casa.jpg'
+    orientation: 'vertical'
+    padding: '120dp', '29dp'
+    spacing: '100dp'
+    # Widget:
+    Label:
+      text: "ArcBird"
+      font_size: '70dp'
+    # Widget:
+    BoxLayout:
+      padding: '50dp'
+      spacing: '50dp'
+      Button:
+        text:'Start'
+        on_release: app.root.current = 'game'
+      Button:
+        text:'Exit'
+        on_release: app.stop()
+
+<Player>:
+  source: 'bola-de-basquete.png'
+
+<Game>:
+  canvas:
+    Rectangle:
+      size: self.size
+      pos: self.pos
+      source: 'fundo_casa.jpg'
+  Player:
+    size_hint: 0.2, 0.2
+    pos_hint: {'x': 0.3, 'y': 0.3}
