@@ -6,6 +6,7 @@ from kivy.clock import Clock
 from kivy.properties import NumericProperty, ListProperty
 from kivy.uix.widget import Widget
 from kivy.animation import Animation
+from random import random
 
 class Manager(ScreenManager):
     pass
@@ -22,16 +23,22 @@ class Game(Screen):
         Clock.schedule_interval(self.put_obstacle, 1)
 
     def put_obstacle(self, *args):
-        obstacle = Obstacle(x=self.width, height=400)
-        self.add_widget(obstacle)
-        self.obstacles.append(obstacle)
+        gap = self.height * 0.3
+        position = (self.height - gap) * random()
+        width = self.width * 0.05
+        obstacle_low = Obstacle(x=self.width, height=position, width=width)
+        obstacle_high = Obstacle(x=self.width, y=position + gap, height=self.height - position - gap, width=width)
+        self.add_widget(obstacle_high,3)
+        self.add_widget(obstacle_low,3)
+        self.obstacles.append(obstacle_low)
+        self.obstacles.append(obstacle_high)
 
     def on_pre_enter(self, *args):
         self.ids.player.y = self.height / 2
         self.ids.player.speed = 0
 
     def update(self, *args):
-        self.ids.player.speed += -self.height * 1/30
+        self.ids.player.speed += -self.height * 2 * 1/30
         self.ids.player.y += self.ids.player.speed * 1/30
         if self.ids.player.y > self.height or self.ids.player.y < 0:
             self.game_over()

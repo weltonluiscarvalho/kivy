@@ -43,6 +43,13 @@ Manager:
       pos: self.pos
       source: 'fundo_casa.jpg'
   FloatLayout:
+    Label:
+      text: 'Score: 0'
+      font_size: '50sp'
+      bold:True
+      size_hint_y: None
+      height: self.font_size
+      y: root.height*0.95 - self.height
     Player:
       id: player
       allow_stretch: True
