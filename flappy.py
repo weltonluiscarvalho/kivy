@@ -42,6 +42,8 @@ class Game(Screen):
         self.ids.player.y += self.ids.player.speed * 1/30
         if self.ids.player.y > self.height or self.ids.player.y < 0:
             self.game_over()
+        elif self.player_collided():
+            self.game_over()
 
     def on_touch_down(self, *args):
         self.ids.player.speed = self.height*0.7
@@ -54,6 +56,24 @@ class Game(Screen):
             self.remove_widget(ob)
         self.obstacles = []
         App.get_running_app().root.current = 'game_over'
+
+    def collided(self, widget1, widget2):
+        if widget2.x <= widget1.x + widget1.width and \
+            widget2.x + widget2.width >= widget1.x and \
+            widget2.y <= widget1.y + widget1.height and \
+            widget2.y + widget2.height >= widget1.y:
+            return True
+        return False
+
+    def player_collided(self):
+        collided = False
+        for ob in self.obstacles:
+            if self.collided(self.ids.player, ob):
+                collided = True
+                break
+
+        return collided
+
 
 
 class Player(Image):
