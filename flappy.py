@@ -17,6 +17,7 @@ class Menu(Screen):
 class Game(Screen):
 
     obstacles = []
+    score = NumericProperty(0)
 
     def on_enter(self, *args):
         Clock.schedule_interval(self.update, 1/30)
@@ -36,6 +37,7 @@ class Game(Screen):
     def on_pre_enter(self, *args):
         self.ids.player.y = self.height / 2
         self.ids.player.speed = 0
+        self.score = 0
 
     def update(self, *args):
         self.ids.player.speed += -self.height * 2 * 1/30
@@ -81,17 +83,25 @@ class Player(Image):
     
 class Obstacle(Widget):
     color = ListProperty([0.3, 0.2, 0.2, 1])
+    scored = False
+    game_screen = None
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.anim = Animation(x=-self.width, duration=3)
         self.anim.bind(on_complete=self.vanish)
         self.anim.start(self)
+        self.game_screen = App.get_running_app().root.get_screen('game')
+
+    def on_x(self, *args):
+        if self.game_screen:
+            if self.x < self.game_screen.ids.player.x and not self.scored:
+                self.game_screen.score += 0.5
+                self.scored = True
 
     def vanish(self, *args):
-        game_screen = App.get_running_app().root.get_screen('game')
-        game_screen.remove_widget(self)
-        game_screen.obstacles.remove(self)
+        self.game_screen.remove_widget(self)
+        self.game_screen.obstacles.remove(self)
 
 class GameOver(Screen):
     pass
