@@ -40,6 +40,11 @@ Manager:
       size: self.size
       pos: self.pos
       source: 'fundo_casa.jpg'
-  Player:
-    size_hint: 0.2, 0.2
-    pos_hint: {'x': 0.3, 'y': 0.3}
+  FloatLayout:
+    Player:
+      id: player
+      allow_stretch: True
+      size_hint: None, None
+      size: root.height / 15, root.width / 15
+      x: root.width / 20
+      y: root.height / 2
