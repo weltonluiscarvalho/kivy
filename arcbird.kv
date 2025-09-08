@@ -3,6 +3,8 @@ Manager:
     name: 'menu'
   Game:
     name: 'game'
+  GameOver:
+    name: 'game_over'
 
 <Menu>:
   BoxLayout:
@@ -48,3 +50,27 @@ Manager:
       size: root.height / 15, root.width / 15
       x: root.width / 20
       y: root.height / 2
+
+<GameOver>:
+  BoxLayout:
+    canvas:
+      Color:
+        rgba: 1, 1, 1, 1
+      Rectangle:
+        size: self.size
+        pos: self.pos
+        source: 'fundo_casa_cinza.jpg'
+    orientation: 'vertical'
+    padding: '80dp', '70dp'
+    spacing: '100dp'
+    # Widget:
+    #   size_hint_y: 0.3
+    Label:
+      text: "Game Over"
+      font_size: '70dp'
+    Button:
+      text: 'Try again!'
+      on_release: app.root.current = 'game'
+    Button:
+      text: 'Exit'
+      on_release: app.stop()
