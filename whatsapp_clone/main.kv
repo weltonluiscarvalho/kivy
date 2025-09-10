@@ -25,14 +25,11 @@
             bar_width: 0
             MDBoxLayout:
               id: story_layout
-              orientation: 'vertical'
               adaptive_width: True
               spacing: dp(10)
               padding: [10, 0, 0, 0] # Padding [right, top, left, bottom] to push story items to the right
+
               StoryWithIcon:
-              StoryWithImage:
-                text: 'Username'
-                source: 'davido.jpg'
 
         MDBoxLayout:
           orientation: 'vertical'
@@ -44,3 +41,4 @@
           MDList:
             id: chatTimeLine
             spacing: dp(10)
+            # ChatListItem:
